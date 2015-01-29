@@ -26,8 +26,11 @@ Idle.fork = function(map)
             if(Init) Init.apply( this, arguments );
         };
 
-    //Save reference to class constructor
-    if (map && map.Class) Class[map.Class] = Class;
+    //Save global reference to class constructor
+    if (map && map.Class) {
+        Idle[map.Class] = Class;
+        delete map.Class;
+    }
 
     //Preparing class prototype
     if(Super) delete map.Super;
