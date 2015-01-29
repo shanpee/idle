@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Multiple inheritance test</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf8" />
+        <script type="text/javascript" src="idle.js"></script>
+        <script type="text/javascript" src="debugger.js"></script>
+    </head>
+    <body>
+
+        <script type="text/javascript">
+
+            Foo1 = Idle.fork({
+                Init: function () {
+                    this.prop1 = 200;
+                },
+                mathod1: function () {
+                },
+                prop1_2: false
+
+            });
+
+            Foo2 = Foo1.fork({
+                Init: function ()
+                {
+                    this.prop2 = true;
+                    this.prop1 = 190;
+                }
+
+            });
+
+            Foo3 = Foo2.fork({
+                Init: function ()
+                {
+                    this.prop3 = true;
+                    this.prop1 = 180;
+                },
+                prop1_2: true
+
+            });
+
+            Foo4 = Foo3.fork({
+                Init: function ()
+                {
+                    this.prop4 = "PRO";
+                    this.prop1 = 150;
+                }
+
+            });
+
+            Foo3.prototype.prop3_1 = 31;
+
+            foo1 = new Foo1();
+            foo2 = new Foo2();
+            foo3 = new Foo3();
+            foo4 = new Foo4();
+
+            Foo3.prototype.prop3_2 = 32;
+
+            drawObject(foo1);
+            drawObject(foo2);
+            drawObject(foo3);
+            drawObject(foo4);
+            drawObject(Foo4);
+            drawObject(Foo2);
+
+            document.writeln(foo1 instanceof Idle);
+            document.writeln(foo1 instanceof Foo1);
+            document.writeln(foo1 instanceof Foo2);
+            document.writeln(foo1 instanceof Foo3);
+            document.writeln(foo1 instanceof Foo4);
+
+            document.writeln("<br /><br />");
+
+            document.writeln(foo2 instanceof Idle);
+            document.writeln(foo2 instanceof Foo1);
+            document.writeln(foo2 instanceof Foo2);
+            document.writeln(foo2 instanceof Foo3);
+            document.writeln(foo2 instanceof Foo4);
+
+            document.writeln("<br /><br />");
+
+            document.writeln(foo3 instanceof Idle);
+            document.writeln(foo3 instanceof Foo1);
+            document.writeln(foo3 instanceof Foo2);
+            document.writeln(foo3 instanceof Foo3);
+            document.writeln(foo3 instanceof Foo4);
+
+            document.writeln("<br /><br />");
+
+            document.writeln(foo4 instanceof Idle);
+            document.writeln(foo4 instanceof Foo1);
+            document.writeln(foo4 instanceof Foo2);
+            document.writeln(foo4 instanceof Foo3);
+            document.writeln(foo4 instanceof Foo4);
+
+            document.writeln("<br /><br />");
+            document.writeln("<br /><br />");
+            document.writeln("<br /><br />");
+
+            document.writeln(foo2.constructor === foo3.constructor);
+            document.writeln("<br /><br />");
+            document.writeln(foo1.constructor);
+            document.writeln("<br /><br />");
+            document.writeln(foo2.constructor);
+            document.writeln("<br /><br />");
+            document.writeln(foo3.constructor);
+            document.writeln("<br /><br />");
+            document.writeln(foo4.constructor);
+
+        </script>
+
+    </body>
+</html>
